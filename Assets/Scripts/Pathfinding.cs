@@ -4,14 +4,34 @@ using UnityEngine;
 
 public class Pathfinding : MonoBehaviour
 {
-    public Transform seeker, target; //les transform de la position de départ et d'arrivée
+    public Transform start, target; //les transform de la position de départ et d'arrivée
 
     Grid grid; //un objet de la classe Grid
     
     //appel à toutes les frames de la fonction findPath avec les coordonnées de départ et d'arrivée
     private void Update()
     {
-        FindPath(seeker.position, target.position);
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    start.position = Camera.main.ScreenToWorldPoint(touch.position);
+                    break;
+
+                case TouchPhase.Moved:
+                    start.position = Camera.main.ScreenToWorldPoint(touch.position);
+                    break;
+
+                case TouchPhase.Ended:
+                    start.position = Camera.main.ScreenToWorldPoint(touch.position);
+                    break;
+            }
+        }
+
+        FindPath(start.position, target.position);
     }
 
     //assignation de l'objet de la classe Grid

@@ -33,10 +33,14 @@ public class Troup : MonoBehaviour
         else
         {
             //on lui assigne la position de départ
-            troupPosition = pathfinding.seeker;
+            troupPosition = pathfinding.start;
             //on lui assigne la texture d'un allié
             troupSprite.sprite = troupData.AllyTroup;
         }
+    }
+
+    private void Update()
+    {
         //on réassigne la position de l'unité
         transform.position = troupPosition.position;
     }
